@@ -91,7 +91,7 @@ var mut my_var :type = value
 const PI = 3.14159  # Defines a constant
 
 # New Feature: Type Checking
-if type(variable) == "string"{
+if type(variable) == "string" {
     printf("Variable is a string")
 }
 
@@ -99,7 +99,7 @@ if type(variable) == "string"{
 #useing <name_to_import>
 
 ### Lists and Arrays:
-my_list = arr! ["element1", "element2", "element3"]
+my_list = arr! ["element1", "element2", "element3"];
 
 # New Feature: Sorting
 sort.alphup(my_list, "asc")  # Sorts the list ascending and alphabetically from a to z
@@ -412,16 +412,23 @@ error.handling {
 
 ### Math
 # 1st: +
-1 + 2 = 3
+1 + 2 
+= 3
 
 # 2nd: -
-2 - 1 = 1
+2 - 1 
+= 1
 
 # 3rd: /
-10 / 5 = 2
+10 / 5 
+= 2
 
 # 4th: *
-2 * 2 = 4
+2 * 2 
+= 4
+
+# general
+you cant add a string to an intterger
 
 ### Scheduled tasks (for automation)
 # 1st: 
@@ -441,9 +448,6 @@ lambda_function = lambda x: x * 2
 var result :int = lambda_function(5)
 printf("Result: {result}")
 
-
-### 
-listen.key() # Listens for a key press and executes code when pressed
 
 ### Memory management (Low-Level, Rust/C-like)
 # Allocate memory (like malloc in C)
