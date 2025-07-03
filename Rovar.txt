@@ -1,0 +1,581 @@
+# Name: Rovar
+# file type: .rov 
+# created: 2025-05-19
+
+
+# =============================
+# Rovar Language Quick Reference
+# =============================
+
+## Table of Contents
+1. [Data Types](#data-types)
+2. [Variables & Constants](#variables-constants)
+3. [Operators](#operators)
+4. [Control Flow](#control-flow)
+5. [Functions & Lambdas](#functions-lambdas)
+6. [Lists, Arrays & Dictionaries](#lists-arrays-dictionaries)
+7. [File & System Operations](#file-system-operations)
+8. [Memory Management](#memory-management)
+9. [Error Handling & Logging](#error-handling-logging)
+10. [Network](#network)
+11. [Math](#math)
+12. [Scheduled Tasks](#scheduled-tasks)
+13. [Best Practices](#best-practices)
+14. [Roadmap](#roadmap)
+
+---
+
+## Data Types
+| Type   | Example                | Description                |
+|--------|------------------------|----------------------------|
+| int    | var x :int = 5         | Integer                    |
+| str    | var s :str = "hi"      | String                     |
+| bool   | var b :bool = true     | Boolean                    |
+| no     | var p :no = ...        | Unclear/Path/Any           |
+| *int   | var p :*int = alloc(4) | Pointer to int             |
+| arr    | arr! [1,2,3]           | Array/List                 |
+| dict   | {"a":1, "b":2}         | Dictionary/Hashmap         |
+| *T?    | let p: *int? = ...     | Nullable Pointer           |
+
+## Operators
+| Operator | Meaning         | Example           |
+|----------|----------------|-------------------|
+| =, ==    | equal          | x == 5            |
+| !=, !==  | not equal      | x != 5            |
+| &&       | and            | a && b            |
+| ||       | or             | a || b            |
+| +, -, *, / | math         | 1 + 2, 3 * 4      |
+
+---
+
+## Best Practices
+- Always free memory allocated with `alloc` using `free`.
+- Use `error_handling` for all risky operations (file, network, memory).
+- Prefer constants (`const`) for fixed values.
+- Use logging (`log.info`, `log.error`) for debugging and monitoring.
+- Avoid magic numbers; use named variables/constants.
+- Check types before conversion: `if type(x) == "int" { ... }`.
+- Use comments `< ... >` and `/**/ ...` for documentation.
+- Mark system-specific code (Windows/Linux) clearly.
+
+---
+
+
+# Code:
+
+### Misc:
+'=' / '==' equal
+'!=' / '!==' not equal
+'&&' and
+'||' or
+''
+num  # any number
+NULL # no value
+true # true
+false # false
+at the end of every line ;
+
+
+
+data types:
+var str_var :str = "hello"  # String
+var int_var :int = 42  # Integer
+var bool_var :bool = true  # Boolean
+var no_var :no = anything # for unclear types like path, etc.
+
+### Variables:
+var my_var :type = value
+var mut my_var :type = value
+
+# New Feature: Constants
+const PI = 3.14159  # Defines a constant
+
+# New Feature: Type Checking
+if type(variable) == "string"{
+    printf("Variable is a string")
+}
+
+### import
+#useing <name_to_import>
+
+### Lists and Arrays:
+my_list = arr! ["element1", "element2", "element3"]
+
+# New Feature: Sorting
+sort.alphup(my_list, "asc")  # Sorts the list ascending and alphabetically from a to z
+sort.numup(my_list, "desc")  # Sorts the list descending and numerically from smallest to largest
+sort.numdown(my_list, "asc")  # Sorts the list ascending and numerically from largest to smallest
+sort.alphdown(my_list, "asc")  # Sorts the list ascending and alphabetically from z to a
+
+# New Feature: Filtering
+filtered_list = filter.arr(my_list, lambda x: x.startswith("e"))
+
+### Output:
+
+# In Terminal
+# Without input:
+printf("cant enter")
+# With input:
+printf("Enter")
+var input_var :str = std::scan()
+
+# In Window:
+MsgBox("Content")
+MsgBox("Content", rov="option1 or variable" + "option2", Exclamation)
+# All options and the icon of the MsgBox (Exclamation, Error, Info, Question)
+
+### Keywords:
+
+# 1st: if
+if (MsgBox == "option") {
+    # execute code
+}
+
+# 2nd: while.True
+loop {
+    #code
+}
+
+# 3rd: define a function
+fn block_name {
+    # code
+}
+
+
+
+# 4th: input, output and MsgBox
+# Without input:
+printf("Prints text to terminal")
+# With input:
+printf("Question with answer option in terminal")
+var input_var :str = std::scan()
+MsgBox("Shows text in window")
+
+# 5th: else
+if #code {
+    #code
+} elseif (condition) {
+    #code
+} else {
+    #code
+}
+
+# 6th: break (with count)
+loop (10) {
+    #code
+}
+
+
+# 7th: Comment
+< this is a comment >
+/**/ multi line comment
+
+# 8th: return
+return (a + b)
+
+# 9th: include
+include "module.rov"
+
+# 10th: time.sleep
+sleep(2)  # Waits 2 seconds
+
+# 11th: random
+random.choice = random()
+
+# 12th: time_now
+time.now()
+
+# 13th: exit
+exit(0)
+
+# 14th: for-loop
+for animal in animals_list {
+    MsgBox(animal)
+}
+
+for (i = (1, 101)) {
+    printf(i, "Hello")
+}
+
+# 15th: File operations (with Trm.Run())
+windows:
+Trm.Run["C:\\Program Files\\MyProgram\\program.exe"];  # Open file or application
+Trm.Run["C:\\Documents\\myfile.txt"];  # Open file
+
+linux:
+Trm.Run["/home/<username>"]
+
+16th: Convert variable
+convert.var('variable_name' :'current_type' => new_type)  # Converts a variable to a new type
+
+# open_file - Opens a file for reading, writing or appending
+file = open.file("text.txt", "r")  # Open file for reading
+text = read.file(file)
+printf(text)
+
+# Write to file
+file = open.file("text.txt", "w")
+write.file(file, "Hello!")
+close.file(file)
+
+# Append text to file
+file = open.file("text.txt", "a")
+write.file(file, "Another text.")
+close.file(file)
+
+# Close file
+close.file(file)
+
+# Create new file
+create.file("name.txt", "path") {
+    # Content of the file
+    var content :str = "This is the content to be inserted into the file."
+    write.file(file, content)
+}
+
+switch (x) {
+    "1" => {
+        <! code >
+    }
+    "2" => {
+        <! code >
+    }
+    NULL => {
+        <! code if the input isnt listed in the options >
+    }
+}
+
+
+
+
+
+### System functions:
+
+# 1st: Restart system
+system.restart()  # Restarts the computer
+
+# 2nd: Shutdown system
+system.shutdown()  # Shuts down the computer
+
+# 3rd: Lock system
+system.lock()  # Locks the computer
+
+# 4th: Logout user
+system.logout()  # Logs out the user
+
+# 5th: Turn off screen
+system.screen_off()  # Turns off the screen
+
+# 6th: Turn on screen
+system.screen_on()  # Turns on the screen
+
+# 7th: Delete file
+del.file("path\\to\\file.txt")  # Deletes the specified file
+
+# 8th: Move file
+move.file("path\\to\\file.txt", "new\\path\\to\\file.txt")  # Moves the file to the new location
+
+# 9th: Delete folder or drive
+# Folder:
+del.folder("path\\to\\folder")  # Deletes the folder with content
+
+# 10th Drive:
+del.drive("Name or letter of the drive")  # Deletes the entire content of the drive
+
+# 11th: Data structure optimization and efficiency
+# Example for Dictionary (Hashmap)
+user = {"name": "Max", "password": "1234"}
+
+# 12th: Logging and Debugging
+fn debug_log(message :str) {
+    if debug_mode {
+        write_log(f"DEBUG: {message}")
+    }
+}
+
+# 13th: Kill process
+system.kill.process("name.exe")
+
+# 14th: Insert and save data in a file
+addto.file.txt("Code or text to be added", line_where_to_insert)
+
+# 15th: Check existence
+check.exists("Path to file")
+
+# New Feature: CPU usage
+cpu_usage = system.cpu.usage()
+printf("CPU usage: {cpu_usage}%")
+
+# New Feature: RAM usage
+ram_usage = system.ram.usage()
+printf("RAM usage: {ram_usage} MB")
+
+# New Feature: Disk space
+disk_space = system.disk.space("C:")
+printf("Free space on C:: {disk_space} GB")
+
+# Network usage
+network_usage = system.network.usage()
+
+# terminal type
+terminal_type = system.get.terminal()
+printf("Your OS uses {terminal_type}")
+
+# write-terminal
+Trm.w("commands to be written and executed in the terminal")
+
+## utilization
+#cpu
+system.use.cpu(100 %)
+
+#ram
+system.use.ram(100 %)
+
+#disk
+system.use.disk(100 %)
+
+#network
+system.use.network(100 %)
+
+
+### Network operations
+
+# 1st: request
+# Example for HTTP-GET request (if network operations are needed)
+import requests
+response = requests.get("https://example.com/api")
+if response.status_code == 200{
+    printf("Connected successfully!")
+} else {
+    printf("Connection failed!")
+}
+
+# 2nd: navigate to link
+navto.link("http://example.com")
+
+# 3rd: download from link
+getfrom.link("http://example.com/example.txt")
+
+# 4th: check for open ports
+check.ports(ip_or_network_name)
+
+# 5th: websocket
+websocket.connect("ws://example.com/socket")
+websocket.send("Message")
+websocket.close()
+
+# 6th: ftp
+ftp.connect("ftp://example.com", username="user", password="pass")
+ftp.upload("local_file.txt", "remote_file.txt")
+ftp.download("remote_file.txt", "local_file.txt")
+ftp.close()
+
+# New Feature: Ping
+var ping_result :bool = network.ping("example.com")
+if ping_result {
+    printf("Ping successful!")
+} else {
+    printf("Ping failed!")
+}
+
+# New Feature: DNS resolution
+ip_address = network.resolve_dns("example.com")
+printf("IP address: {ip_address}")
+
+## Error handling (Rovar style everywhere)
+error_handling {
+    try {
+        # code that might fail
+    }
+    error (err) {
+        printf("Error occurred: {err}")
+    }
+    finally {
+        printf("Code in 'finally' block always runs")
+    }
+}
+
+# 2nd: Logging system
+log.info("This is an info message.")
+log.error("This is an error message.")
+log.debug("This is a debug message.")
+
+# New Feature: Custom errors
+error.handling {
+    try {
+        # code
+    }
+    error (CustomError err) {
+        printf("Custom error: {err.message}")
+    }
+}
+
+### Math
+# 1st: +
+1 + 2 = 3
+
+# 2nd: -
+2 - 1 = 1
+
+# 3rd: /
+10 / 5 = 2
+
+# 4th: *
+2 * 2 = 4
+
+### Scheduled tasks (for automation)
+# 1st: 
+schedule.every(10) do (task_name)
+schedule.every(10.day) at ("10:30") do (task_name)
+
+# New Feature: One-time tasks
+schedule.once(5).seconds.do(task_name)  # Executes the task after 5 seconds
+
+### Blocks
+fn block_name {
+    # continue here
+}
+
+# New Feature: Lambda functions
+lambda_function = lambda x: x * 2
+var result :int = lambda_function(5)
+printf("Result: {result}")
+
+
+### 
+listen.key() # Listens for a key press and executes code when pressed
+
+### Memory management (Low-Level, Rust/C-like)
+# Allocate memory (like malloc in C)
+let ptr = alloc(100)  # allocates 100 bytes, returns pointer
+
+# Access memory (pointer dereference)
+printf(ptr[0])         # print value at address ptr+0
+ptr[0] = 42           # set value at address ptr+0
+
+# Free memory (like free in C)
+free(ptr)
+
+# Optional: Nullable pointers (like Option in Rust)
+let p: *int? = alloc(10)
+if p != null {
+    printf("Pointer valid!")
+    free(p)
+} else {
+    printf("Could not allocate memory!")
+}
+
+# Helper functions for memory
+memcpy(ptr2, ptr1, 100)   # Copies 100 bytes from ptr1 to ptr2
+memset(ptr, 0, 100)       # Sets 100 bytes from ptr to 0
+realloc(ptr, 200)         # Resizes memory area
+
+# Warning: Memory allocated with alloc MUST be freed with free!
+
+# =============================
+# Core Functions Overview
+# =============================
+
+## System Functions
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| system.restart()                 | Restart computer                   | system.restart()                        |
+| system.shutdown()                | Shutdown computer                  | system.shutdown()                       |
+| system.lock()                    | Lock computer                      | system.lock()                           |
+| system.logout()                  | Logout user                        | system.logout()                         |
+| system.screen_off()              | Turn off screen                    | system.screen_off()                     |
+| system.screen_on()               | Turn on screen                     | system.screen_on()                      |
+| system.kill.process(name)        | Kill process by name               | system.kill.process("explorer.exe")     |
+| system.cpu.usage()               | Get CPU usage (%)                  | cpu = system.cpu.usage()                |
+| system.ram.usage()               | Get RAM usage (MB)                 | ram = system.ram.usage()                |
+| system.disk.space(drive)         | Free disk space (GB)               | system.disk.space("C:")                |
+| system.get.terminal()            | Get terminal type                  | system.get.terminal()                   |
+| system.use.cpu(percent)          | Set CPU usage                      | system.use.cpu(80 %)                    |
+| system.use.ram(percent)          | Set RAM usage                      | system.use.ram(50 %)                    |
+| system.use.disk(percent)         | Set disk usage                     | system.use.disk(90 %)                   |
+| system.use.network(percent)      | Set network usage                  | system.use.network(100 %)               |
+
+## File & Directory Functions
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| open.file(path, mode)            | Open file (r/w/a)                  | file = open.file("a.txt", "r")         |
+| read.file(file)                  | Read file contents                  | text = read.file(file)                  |
+| write.file(file, text)           | Write to file                       | write.file(file, "Hello!")              |
+| close.file(file)                 | Close file                          | close.file(file)                        |
+| create.file(name, path) { ... }  | Create new file with content        | create.file("n.txt", "./") { ... }      |
+| del.file(path)                   | Delete file                         | del.file("a.txt")                       |
+| move.file(src, dst)              | Move file                           | move.file("a.txt", "b.txt")             |
+| del.folder(path)                 | Delete folder                       | del.folder("./tmp")                     |
+| del.drive(name)                  | Delete drive content                | del.drive("D:")                         |
+| addto.file.txt(text, line)       | Insert text at line                 | addto.file.txt("foo", 3)                |
+| check.exists(path)               | Check if file/folder exists         | check.exists("a.txt")                   |
+
+## Network Functions
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| network.ping(host)               | Ping host, returns bool             | network.ping("example.com")             |
+| network.resolve_dns(host)        | DNS lookup                          | network.resolve_dns("example.com")      |
+| check.ports(ip)                  | Check open ports                    | check.ports("192.168.1.1")              |
+| websocket.connect(url)           | Connect websocket                   | websocket.connect("ws://...")           |
+| websocket.send(msg)              | Send websocket message              | websocket.send("hi")                    |
+| websocket.close()                | Close websocket                     | websocket.close()                        |
+| ftp.connect(url, user, pass)     | Connect to FTP                      | ftp.connect("ftp://...", user, pass)    |
+| ftp.upload(local, remote)        | Upload file to FTP                  | ftp.upload("a.txt", "b.txt")            |
+| ftp.download(remote, local)      | Download file from FTP              | ftp.download("b.txt", "a.txt")          |
+| ftp.close()                      | Close FTP connection                | ftp.close()                              |
+| navto.link(url)                  | Open link in browser                | navto.link("http://...")                |
+| getfrom.link(url)                | Download file from link             | getfrom.link("http://.../a.txt")        |
+
+## Logging & Error Handling
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| log.info(text)                   | Info log                            | log.info("Info")                        |
+| log.error(text)                  | Error log                           | log.error("Error")                      |
+| log.debug(text)                  | Debug log                           | log.debug("Debug")                      |
+| error_handling { ... }           | Try/catch/finally block             | error_handling { try { ... } error (e) { ... } finally { ... } } |
+
+## Memory Management
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| alloc(size)                      | Allocate memory, returns pointer    | let ptr = alloc(100)                    |
+| free(ptr)                        | Free memory                         | free(ptr)                               |
+| memcpy(dst, src, n)              | Copy n bytes                        | memcpy(ptr2, ptr1, 100)                 |
+| memset(ptr, val, n)              | Set n bytes to value                | memset(ptr, 0, 100)                     |
+| realloc(ptr, newsize)            | Resize memory                       | realloc(ptr, 200)                       |
+
+## Math & Time
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| random()                         | Random number                       | x = random()                            |
+| time.now()                       | Current time                        | t = time.now()                          |
+| sleep(seconds)                   | Wait                                | sleep(2)                                |
+
+## Miscellaneous
+| Function                        | Description                        | Example                                 |
+|----------------------------------|------------------------------------|-----------------------------------------|
+| printf(text)                     | Print to terminal                   | printf("hi")                            |
+| MsgBox(text, ...)                | Show message box                    | MsgBox("hi", Exclamation)               |
+| listen.key                       | Listen for key                      | listen.key                              |
+| lambda x: ...                    | Lambda function                     | lambda x: x*2                           |
+| convert.var('var':type=>type)    | Type conversion                     | convert.var('x':str=>int)               |
+| type(x)                          | Get type of variable                | type(x)                                 |
+| arr! [a, b, c]                   | Create array                        | arr! [1,2,3]                            |
+| filter.arr(arr, lambda)          | Filter array                        | filter.arr(my_list, lambda x: ...)      |
+| sort.alphup(arr, "asc")          | Sort array                          | sort.alphup(my_list, "asc")             |
+
+---
+
+# New Feature: Newline escape
+- Use `\n` in strings to insert a line break (newline).
+- Example:
+printf("Hello\nWorld")  # Output:
+# Hello
+# World
+
+# In multi-line strings:
+var text :str = "Line1\nLine2\nLine3"
+printf(text)
+
+# In MsgBox or file output:
+MsgBox("First line\nSecond line")
+write.file(file, "Line1\nLine2")
