@@ -226,11 +226,6 @@ printf({text})
 var content :str = "This is the content"
 std::path::file::write("file", {content})
 
-# Append text to file
-file = open.file("text.txt", "a")
-write.file(file, "Another text.")
-close.file(file)
-
 # Close file
 std::path::file::close(file)
 
