@@ -34,11 +34,11 @@
 | no     | var p :no = ...        | Unclear/Path/Any           |
 | *int   | var p :*int = alloc(4) | Pointer to int             |
 | arr    | arr! [1,2,3]           | Array/List                 |
-| dict   | {"a":1, "b":2}         | Dictionary/Hashmap         |
+| dict   | dir user = {"a":1, "b":2} | Dictionary/Hashmap         |
 | *T?    | let p: *int? = ...     | Nullable Pointer           |
 
 ## Operators
-| Operator | Meaning         | Example           |
+| Operator | Meaning        | Example           |
 |----------|----------------|-------------------|
 | =, ==    | equal          | x == 5            |
 | !=, !==  | not equal      | x != 5            |
@@ -73,7 +73,7 @@ num  # any number
 NULL # no value
 true # true
 false # false
-at the end of every line ;
+at the end of every line ';'
 
 
 
@@ -88,18 +88,18 @@ var my_var :type = value
 var mut my_var :type = value
 
 # New Feature: Constants
-const PI = 3.14159  # Defines a constant
+const PI :int = 3.14159  # Defines a constant
 
 # New Feature: Type Checking
-if type(variable) == "string" {
-    printf("Variable is a string")
+if (type(variable) == "str") {
+    printf("Variable is a string");
 }
 
 ### import
-#useing <name_to_import>
+#include <name_to_import>
 
 ### Lists and Arrays:
-my_list = arr! ["element1", "element2", "element3"];
+my_list :str = arr! ["element1", "element2", "element3"];
 
 # New Feature: Sorting
 sort.alphup(my_list, "asc")  # Sorts the list ascending and alphabetically from a to z
@@ -119,16 +119,15 @@ printf("cant enter")
 printf("Enter")
 var input_var :str = std::scan()
 
-# In Window:
-MsgBox("Content")
-MsgBox("Content", rov="option1 or variable" + "option2", Exclamation)
-# All options and the icon of the MsgBox (Exclamation, Error, Info, Question)
-
 ### Keywords:
 
 # 1st: if
-if (MsgBox == "option") {
+if () {
     # execute code
+} elseif () {
+
+} else {
+
 }
 
 # 2nd: while.True
@@ -137,10 +136,15 @@ loop {
 }
 
 # 3rd: define a function
-fn block_name {
+fn main() {
     # code
 }
 
+void name() {
+    <! code >
+}
+
+fn main is only once in the code, void is every other funktion
 
 
 # 4th: input, output and MsgBox
@@ -149,55 +153,60 @@ printf("Prints text to terminal")
 # With input:
 printf("Question with answer option in terminal")
 var input_var :str = std::scan()
-MsgBox("Shows text in window")
 
-# 5th: else
-if #code {
-    #code
-} elseif (condition) {
-    #code
-} else {
-    #code
-}
-
-# 6th: break (with count)
+# 7th: break (with count)
 loop (10) {
     #code
 }
 
-
-# 7th: Comment
-< this is a comment >
+# 8th: Comment
+<! this is a comment >
 /**/ multi line comment
 
-# 8th: return
+# 9th: return
 return (a + b)
 
-# 9th: include
-include "module.rov"
+# 10th: include
+#include "module.rov"
 
-# 10th: time.sleep
+# 11th: time.sleep
 sleep(2)  # Waits 2 seconds
 
-# 11th: random
-random.choice = random()
+# 12th: random
+var random_choice :no = rand()
 
-# 12th: time_now
+# 13th: time_now
 time.now()
 
-# 13th: exit
-exit(0)
+# 14th: exit
+return 0;
 
-# 14th: for-loop
-for animal in animals_list {
-    MsgBox(animal)
+# 15th: for-loop
+# Classic C-style:
+for (var i = 0; i < 10; i++) {
+    printf(i)
+}
+# Or over an array:
+for (var i = 0; i < my_list.len(); i++) {
+    printf(my_list[i])
+}
+# Or modern:
+for item in my_list {
+    printf(item)
 }
 
-for (i = (1, 101)) {
-    printf(i, "Hello")
-}
+# Array methods:
+my_list.push(42)      # Appends 42 to the end
+my_list.pop()         # Removes the last element
+len = my_list.len()   # Returns the length
 
-# 15th: File operations (with Trm.Run())
+# Dictionary/Hashmap:
+dir user = {"name": "Max", "password": "1234"}
+
+# Keywords:
+# return, dir, var, let, fn, void, if, else, for, while, break, continue, true, false, null, import, include, const, try, error, finally
+
+# 16th: File operations (with Trm.Run())
 windows:
 Trm.Run["C:\\Program Files\\MyProgram\\program.exe"];  # Open file or application
 Trm.Run["C:\\Documents\\myfile.txt"];  # Open file
@@ -205,18 +214,17 @@ Trm.Run["C:\\Documents\\myfile.txt"];  # Open file
 linux:
 Trm.Run["/home/<username>"]
 
-16th: Convert variable
+# 17th: Convert variable
 convert.var('variable_name' :'current_type' => new_type)  # Converts a variable to a new type
 
 # open_file - Opens a file for reading, writing or appending
-file = open.file("text.txt", "r")  # Open file for reading
-text = read.file(file)
-printf(text)
+std::path::file::open(path to file)  # Open file for reading
+std::path::file::read(path to file)
+printf({text})
 
 # Write to file
-file = open.file("text.txt", "w")
-write.file(file, "Hello!")
-close.file(file)
+var content :str = "This is the content"
+std::path::file::write("file", {content})
 
 # Append text to file
 file = open.file("text.txt", "a")
@@ -224,67 +232,66 @@ write.file(file, "Another text.")
 close.file(file)
 
 # Close file
-close.file(file)
+std::path::file::close(file)
 
 # Create new file
-create.file("name.txt", "path") {
+std::path::file::create.file("name.txt", "path") {
     # Content of the file
     var content :str = "This is the content to be inserted into the file."
     write.file(file, content)
 }
 
+# switch case 
 switch (x) {
     "1" => {
         <! code >
+        break;
     }
     "2" => {
         <! code >
+        break;
     }
     NULL => {
-        <! code if the input isnt listed in the options >
+        <! code if the input isn't listed in the options >
     }
 }
-
-
-
 
 
 ### System functions:
 
 # 1st: Restart system
-system.restart()  # Restarts the computer
+std::system::restart()  # Restarts the computer
 
 # 2nd: Shutdown system
-system.shutdown()  # Shuts down the computer
+std::system::shutdown()  # Shuts down the computer
 
 # 3rd: Lock system
-system.lock()  # Locks the computer
+std::system::lock()  # Locks the computer
 
 # 4th: Logout user
-system.logout()  # Logs out the user
+std::system::logout()  # Logs out the user
 
 # 5th: Turn off screen
-system.screen_off()  # Turns off the screen
+std::system::screen.off()  # Turns off the screen
 
 # 6th: Turn on screen
-system.screen_on()  # Turns on the screen
+std::system::screen.on()  # Turns on the screen
 
 # 7th: Delete file
-del.file("path\\to\\file.txt")  # Deletes the specified file
+std::path::remove("path/to/file.txt")  # Deletes the specified file
 
 # 8th: Move file
-move.file("path\\to\\file.txt", "new\\path\\to\\file.txt")  # Moves the file to the new location
+std::path::move("path/to/file.txt", "new/path/to/file.txt")  # Moves the file to the new location
 
 # 9th: Delete folder or drive
 # Folder:
-del.folder("path\\to\\folder")  # Deletes the folder with content
-
-# 10th Drive:
-del.drive("Name or letter of the drive")  # Deletes the entire content of the drive
+std::path::remove_folder("path/to/folder")  # Deletes the folder with content
+# Drive:
+std::path::remove_drive("Name or letter of the drive")  # Deletes the entire content of the drive
 
 # 11th: Data structure optimization and efficiency
 # Example for Dictionary (Hashmap)
-user = {"name": "Max", "password": "1234"}
+dir user = {"name": "Max", "password": "1234"}
 
 # 12th: Logging and Debugging
 fn debug_log(message :str) {
@@ -294,31 +301,31 @@ fn debug_log(message :str) {
 }
 
 # 13th: Kill process
-system.kill.process("name.exe")
+std::system::kill_process("name.exe")
 
 # 14th: Insert and save data in a file
-addto.file.txt("Code or text to be added", line_where_to_insert)
+std::file::add_text("Code or text to be added", line_where_to_insert)
 
 # 15th: Check existence
-check.exists("Path to file")
+std::path::check("Path to file")
 
 # New Feature: CPU usage
-cpu_usage = system.cpu.usage()
+cpu_usage = std::system::cpu_usage()
 printf("CPU usage: {cpu_usage}%")
 
 # New Feature: RAM usage
-ram_usage = system.ram.usage()
+ram_usage = std::system::ram_usage()
 printf("RAM usage: {ram_usage} MB")
 
 # New Feature: Disk space
-disk_space = system.disk.space("C:")
+disk_space = std::system::disk_space("C:")
 printf("Free space on C:: {disk_space} GB")
 
 # Network usage
-network_usage = system.network.usage()
+network_usage = std::system::network_usage()
 
 # terminal type
-terminal_type = system.get.terminal()
+terminal_type = std::system::get_terminal()
 printf("Your OS uses {terminal_type}")
 
 # write-terminal
@@ -326,16 +333,16 @@ Trm.w("commands to be written and executed in the terminal")
 
 ## utilization
 #cpu
-system.use.cpu(100 %)
+std::system::use_cpu(100 %)
 
 #ram
-system.use.ram(100 %)
+std::system::use_ram(100 %)
 
 #disk
-system.use.disk(100 %)
+std::system::use_disk(100 %)
 
 #network
-system.use.network(100 %)
+std::system::use_network(100 %)
 
 
 ### Network operations
@@ -344,7 +351,7 @@ system.use.network(100 %)
 # Example for HTTP-GET request (if network operations are needed)
 import requests
 response = requests.get("https://example.com/api")
-if response.status_code == 200{
+if (response.status_code == 200) {
     printf("Connected successfully!")
 } else {
     printf("Connection failed!")
@@ -372,7 +379,7 @@ ftp.close()
 
 # New Feature: Ping
 var ping_result :bool = network.ping("example.com")
-if ping_result {
+if (ping_result) {
     printf("Ping successful!")
 } else {
     printf("Ping failed!")
@@ -383,15 +390,12 @@ ip_address = network.resolve_dns("example.com")
 printf("IP address: {ip_address}")
 
 ## Error handling (Rovar style everywhere)
-error_handling {
+error.handl() {
     try {
         # code that might fail
     }
     error (err) {
         printf("Error occurred: {err}")
-    }
-    finally {
-        printf("Code in 'finally' block always runs")
     }
 }
 
@@ -439,13 +443,13 @@ schedule.every(10.day) at ("10:30") do (task_name)
 schedule.once(5).seconds.do(task_name)  # Executes the task after 5 seconds
 
 ### Blocks
-fn block_name {
+void block_name('some funktion, varibales form other funktions,...') {
     # continue here
 }
 
 # New Feature: Lambda functions
-lambda_function = lambda x: x * 2
-var result :int = lambda_function(5)
+lambda.function = lambda x: x * 2
+var result :int = lambda.function(5)
 printf("Result: {result}")
 
 
@@ -507,40 +511,40 @@ realloc(ptr, 200)         # Resizes memory area
 | write.file(file, text)           | Write to file                       | write.file(file, "Hello!")              |
 | close.file(file)                 | Close file                          | close.file(file)                        |
 | create.file(name, path) { ... }  | Create new file with content        | create.file("n.txt", "./") { ... }      |
-| del.file(path)                   | Delete file                         | del.file("a.txt")                       |
-| move.file(src, dst)              | Move file                           | move.file("a.txt", "b.txt")             |
-| del.folder(path)                 | Delete folder                       | del.folder("./tmp")                     |
-| del.drive(name)                  | Delete drive content                | del.drive("D:")                         |
-| addto.file.txt(text, line)       | Insert text at line                 | addto.file.txt("foo", 3)                |
-| check.exists(path)               | Check if file/folder exists         | check.exists("a.txt")                   |
+| std::path::remove(path)                   | Delete file                         | std::path::remove("a.txt")                       |
+| std::path::move(src, dst)              | Move file                           | std::path::move("a.txt", "b.txt")             |
+| std::path::remove_folder(path)                 | Delete folder                       | std::path::remove_folder("./tmp")                     |
+| std::path::remove_drive(name)                  | Delete drive content                | std::path::remove_drive("D:")                         |
+| std::file::add_text(text, line)       | Insert text at line                 | std::file::add_text("foo", 3)                |
+| std::path::check(path)               | Check if file/folder exists         | std::path::check("a.txt")                   |
 
 ## Network Functions
-| Function                        | Description                        | Example                                 |
-|----------------------------------|------------------------------------|-----------------------------------------|
+| Function                        | Description                          | Example                                 |
+|----------------------------------|-------------------------------------|-----------------------------------------|
 | network.ping(host)               | Ping host, returns bool             | network.ping("example.com")             |
 | network.resolve_dns(host)        | DNS lookup                          | network.resolve_dns("example.com")      |
 | check.ports(ip)                  | Check open ports                    | check.ports("192.168.1.1")              |
 | websocket.connect(url)           | Connect websocket                   | websocket.connect("ws://...")           |
 | websocket.send(msg)              | Send websocket message              | websocket.send("hi")                    |
-| websocket.close()                | Close websocket                     | websocket.close()                        |
+| websocket.close()                | Close websocket                     | websocket.close()                       |
 | ftp.connect(url, user, pass)     | Connect to FTP                      | ftp.connect("ftp://...", user, pass)    |
 | ftp.upload(local, remote)        | Upload file to FTP                  | ftp.upload("a.txt", "b.txt")            |
 | ftp.download(remote, local)      | Download file from FTP              | ftp.download("b.txt", "a.txt")          |
-| ftp.close()                      | Close FTP connection                | ftp.close()                              |
+| ftp.close()                      | Close FTP connection                | ftp.close()                             |
 | navto.link(url)                  | Open link in browser                | navto.link("http://...")                |
 | getfrom.link(url)                | Download file from link             | getfrom.link("http://.../a.txt")        |
 
 ## Logging & Error Handling
-| Function                        | Description                        | Example                                 |
-|----------------------------------|------------------------------------|-----------------------------------------|
+| Function                         | Description                         | Example                                 |
+|----------------------------------|-------------------------------------|-----------------------------------------|
 | log.info(text)                   | Info log                            | log.info("Info")                        |
 | log.error(text)                  | Error log                           | log.error("Error")                      |
 | log.debug(text)                  | Debug log                           | log.debug("Debug")                      |
 | error_handling { ... }           | Try/catch/finally block             | error_handling { try { ... } error (e) { ... } finally { ... } } |
 
 ## Memory Management
-| Function                        | Description                        | Example                                 |
-|----------------------------------|------------------------------------|-----------------------------------------|
+| Function                         | Description                         | Example                                 |
+|----------------------------------|-------------------------------------|-----------------------------------------|
 | alloc(size)                      | Allocate memory, returns pointer    | let ptr = alloc(100)                    |
 | free(ptr)                        | Free memory                         | free(ptr)                               |
 | memcpy(dst, src, n)              | Copy n bytes                        | memcpy(ptr2, ptr1, 100)                 |
@@ -548,15 +552,15 @@ realloc(ptr, 200)         # Resizes memory area
 | realloc(ptr, newsize)            | Resize memory                       | realloc(ptr, 200)                       |
 
 ## Math & Time
-| Function                        | Description                        | Example                                 |
-|----------------------------------|------------------------------------|-----------------------------------------|
+| Function                         | Description                         | Example                                 |
+|----------------------------------|-------------------------------------|-----------------------------------------|
 | random()                         | Random number                       | x = random()                            |
 | time.now()                       | Current time                        | t = time.now()                          |
 | sleep(seconds)                   | Wait                                | sleep(2)                                |
 
 ## Miscellaneous
-| Function                        | Description                        | Example                                 |
-|----------------------------------|------------------------------------|-----------------------------------------|
+| Function                         | Description                         | Example                                 |
+|----------------------------------|-------------------------------------|-----------------------------------------|
 | printf(text)                     | Print to terminal                   | printf("hi")                            |
 | MsgBox(text, ...)                | Show message box                    | MsgBox("hi", Exclamation)               |
 | listen.key                       | Listen for key                      | listen.key                              |
