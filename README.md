@@ -1,15 +1,13 @@
-# Rovar-Programming-language
+# Rovar Programming Language
 
 **What is Rovar?**
-Rovar is a new Progrmming language made by just me.
-Its supposed to be an Low level language with many features.
-The Syntax is for this language is hard, because it shares features and Syntax from C and Rust.
+Rovar is a new programming language designed and implemented by a single developer. It aims to be a low-level language with many modern features. The syntax is inspired by C and Rust, but also includes ideas from Python and other languages.
 
 ## Features
 - **Strong Typing:** All variables are explicitly typed (e.g. `var x :int = 5`).
 - **Low-Level Memory Management:** Allocate, free, and manipulate memory directly (like C/Rust) with `alloc`, `free`, `memcpy`, `memset`, and pointer types.
-- **Type Conversion:** Convert variables between types with `convert.var('variable_name' :'current_type' => new_type)`.
-- **Error Handling:** Consistent, modern error handling with `error_handling { try { ... } error (err) { ... } finally { ... } }` blocks. No silent failures—errors are always explicit.
+- **Type Conversion:** Convert variables between types with `convert.var('variable_name' :str => int)`.
+- **Error Handling:** Modern error handling with `error_handling { try { ... } error (err) { ... } finally { ... } }` blocks. No silent failures—errors are always explicit.
 - **System & Network Functions:** Built-in commands for file, process, system, and network operations (e.g. restart, shutdown, ping, ftp, sockets).
 - **Pattern Matching:** `switch` blocks for clear multi-case logic, including a `NULL` case for unmatched values.
 - **Lambda Functions:** Anonymous functions for functional programming and filtering.
@@ -19,25 +17,25 @@ The Syntax is for this language is hard, because it shares features and Syntax f
 
 ## Example
 ```rov
-var name :str = std::scan()
-printf("Hello, {name}!")
+var name :str = std::scan();
+printf("Hello, {name}!");
 
 error_handling {
     try {
-        var ptr :*int = alloc(10)
+        var ptr :*int = alloc(10);
         ptr[0] = 42
-        printf(ptr[0])
-        free(ptr)
+        printf(ptr[0]);
+        free(ptr);
     }
     error (err) {
-        printf("Error: {err}")
+        printf("Error: {err}");
     }
 }
 
 # Type conversion example
-var num_str :str = "123"
-convert.var('num_str' :str => int)
-printf(num_str)
+var num_str :str = "123";
+convert.var('num_str' :str => int);
+printf(num_str);
 ```
 
 ## Syntax Highlights
@@ -61,5 +59,5 @@ printf(num_str)
 - **Dictionaries:** `user = {"name": "Max", "password": "1234"}`
 - **Comments:** `< this is a comment >` and `/**/ multi line comment`
 
-
-**Still in progress**
+**Status:**
+Rovar is still in progress. Contributions, feedback, and ideas are welcome!
