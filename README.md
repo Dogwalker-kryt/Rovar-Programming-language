@@ -61,3 +61,4 @@ printf(num_str);
 
 **Status:**
 Rovar is still in progress. Contributions, feedback, and ideas are welcome!
+- The fisrt version of the compiler is finished, it should compiler to machine code
